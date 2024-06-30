@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class KnifeController : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class KnifeController : MonoBehaviour
     private void  HandleShotInput(){
         if (Input.GetMouseButtonDown(0))
         {
+            _knifeManager.SetDisableKnifeIconColor();
             canShoot = true;
         }
     }
@@ -50,6 +52,11 @@ public class KnifeController : MonoBehaviour
             canShoot = false;
             rb.isKinematic = true;
             transform.SetParent(other.gameObject.transform);
+        }
+
+        if (other.gameObject.CompareTag("Knife"))
+        {
+            SceneManager.LoadScene(0);
         }
     }
 

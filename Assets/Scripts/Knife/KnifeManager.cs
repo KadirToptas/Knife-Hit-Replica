@@ -26,6 +26,7 @@ public class KnifeManager : MonoBehaviour
     void Start()
     {
         CreateKnife();
+        CreateKnifeIcons();
     }
 
     void Update()
@@ -47,7 +48,19 @@ public class KnifeManager : MonoBehaviour
 
     private void CreateKnifeIcons()
     {
-        
+        for (int i = 0; i < knifeCount; i++)
+        {
+            GameObject newKnifeIcon =
+                Instantiate(knifeIconPrefab, knifeIconPosition, knifeIconPrefab.transform.rotation);
+            newKnifeIcon.GetComponent<SpriteRenderer>().color = activeColor;
+            knifeIconPosition.y += 0.5f;
+            knifeIconList.Add(newKnifeIcon);
+        }
+    }
+    
+    public void SetDisableKnifeIconColor()
+    {
+        knifeIconList[(knifeIconList.Count - 1) - knifeIndex].GetComponent<SpriteRenderer>().color = passiveColor;
     }
     
     public void SetKnifeActive(){
